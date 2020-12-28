@@ -14,7 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-
+import sys
+sys.path.insert(0, 'C:/Users/bernard/PycharmProjects/Anon3/anonymizer')
 import argparse
 
 from anonymizer.anonymization import Anonymizer
@@ -48,9 +49,14 @@ def parse_args():
                         metavar='0.3',
                         help='Detection confidence needed to anonymize a detected license plate. '
                              'Must be in [0.001, 1.0]')
+
     parser.add_argument('--write-detections', dest='write_detections', action='store_true')
     parser.add_argument('--no-write-detections', dest='write_detections', action='store_false')
     parser.set_defaults(write_detections=True)
+
+    parser.add_argument('--debug', dest='debug', action='store_true')
+    parser.set_defaults(debug=False)
+
     parser.add_argument('--obfuscation-kernel', required=False, default='21,2,9',
                         metavar='kernel_size,sigma,box_kernel_size',
                         help='This parameter is used to change the way the blurring is done. '

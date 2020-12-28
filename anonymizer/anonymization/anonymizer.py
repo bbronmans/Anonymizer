@@ -8,6 +8,8 @@ from tqdm import tqdm
 
 def load_np_image(image_path):
     image = Image.open(image_path).convert('RGB')
+    # width, height = image.size
+    # image = image.resize((width//4, height//4))
     np_image = np.array(image)
     return np_image
 
@@ -57,7 +59,7 @@ class Anonymizer:
             files.extend(list(Path(input_path).glob(f'**/*.{file_type}')))
 
         for input_image_path in tqdm(files):
-            # Create output directory
+            # Create output - output directory
             relative_path = input_image_path.relative_to(input_path)
             (Path(output_path) / relative_path.parent).mkdir(exist_ok=True, parents=True)
             output_image_path = Path(output_path) / relative_path

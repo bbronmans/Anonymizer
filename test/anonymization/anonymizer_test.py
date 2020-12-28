@@ -61,7 +61,7 @@ class TestAnonymizer:
         # write input images to disk
         input_path = tmp_path / 'input'
         input_path.mkdir()
-        output_path = tmp_path / 'output'
+        output_path = tmp_path / 'output - halfsize plate_t01'
         for i, input_image in enumerate(input_images):
             image_path = input_path / f'{i}.png'
             pil_image = Image.fromarray((input_image * 255).astype(np.uint8), mode='RGB')

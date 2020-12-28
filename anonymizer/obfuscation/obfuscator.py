@@ -169,14 +169,22 @@ class Obfuscator:
 
         image_array = np.expand_dims(image, axis=0)
         box_array = []
+        anonymized_image = np.copy(image)
         for box in boxes:
             x_min = int(math.floor(box.x_min))
             y_min = int(math.floor(box.y_min))
             x_max = int(math.ceil(box.x_max))
             y_max = int(math.ceil(box.y_max))
             box_array.append(np.array([x_min, y_min, x_max, y_max]))
-        box_array = np.stack(box_array, axis=0)
-        box_array = np.expand_dims(box_array, axis=0)
 
-        anonymized_images = self._obfuscate_numpy(image_array, box_array)
-        return anonymized_images[0]
+            anonymized_image[y_min:y_max, x_min:x_max, :] = [255, 0, 0]
+
+        return anonymized_image
+
+            # mask = self._get_box_mask(np.array([x_min, y_min, x_max, y_max]), (image.shape[1], image.shape[2]))
+            # print(mask.shape)
+        # box_array = np.stack(box_array, axis=0)
+        # box_array = np.expand_dims(box_array, axis=0)
+        #
+        # anonymized_images = self._obfuscate_numpy(image_array, box_array)
+        # return anonymized_images[0]
