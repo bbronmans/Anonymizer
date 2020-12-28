@@ -19,7 +19,7 @@ def kernel_initializer(kernels):
         :return: 4D numpy array with weights [filter_height, filter_width, in_channels, out_channels].
         """
         if shape:
-            # second last dimension is input, last dimension is output - halfsize plate_t01
+            # second last dimension is input, last dimension is output
             fan_in = float(shape[-2]) if len(shape) > 1 else float(shape[-1])
             fan_out = float(shape[-1])
         else:

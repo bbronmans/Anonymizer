@@ -15,7 +15,8 @@ limitations under the License.
 """
 
 import sys
-sys.path.insert(0, 'C:/Users/bernard/PycharmProjects/Anon3/anonymizer')
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parents[2].resolve()))
 import argparse
 
 from anonymizer.anonymization import Anonymizer
@@ -77,17 +78,18 @@ def parse_args():
     print(f'plate-threshold: {args.plate_threshold}')
     print(f'write-detections: {args.write_detections}')
     print(f'obfuscation-kernel: {args.obfuscation_kernel}')
+    print(f'debug: {args.debug}')
     print()
 
     return args
 
 
 def main(input_path, image_output_path, weights_path, image_extensions, face_threshold, plate_threshold,
-         write_json, obfuscation_parameters):
+         write_json, obfuscation_parameters, debug):
     download_weights(download_directory=weights_path)
 
     kernel_size, sigma, box_kernel_size = obfuscation_parameters.split(',')
-    obfuscator = Obfuscator(kernel_size=int(kernel_size), sigma=float(sigma), box_kernel_size=int(box_kernel_size))
+    obfuscator = Obfuscator(kernel_size=int(kernel_size), sigma=float(sigma), box_kernel_size=int(box_kernel_size), debug=debug)
     detectors = {
         'face': Detector(kind='face', weights_path=get_weights_path(weights_path, kind='face')),
         'plate': Detector(kind='plate', weights_path=get_weights_path(weights_path, kind='plate'))
@@ -107,4 +109,4 @@ if __name__ == '__main__':
     main(input_path=args.input, image_output_path=args.image_output, weights_path=args.weights,
          image_extensions=args.image_extensions,
          face_threshold=args.face_threshold, plate_threshold=args.plate_threshold,
-         write_json=args.write_detections, obfuscation_parameters=args.obfuscation_kernel)
+         write_json=args.write_detections, obfuscation_parameters=args.obfuscation_kernel, debug=args.debug)

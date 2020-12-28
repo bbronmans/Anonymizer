@@ -9,7 +9,7 @@ from anonymizer.obfuscation.helpers import kernel_initializer, bilinear_filter, 
 
 class Obfuscator:
     """ This class is used to blur box regions within an image with gaussian blurring. """
-    def __init__(self, kernel_size=21, sigma=2, channels=3, box_kernel_size=9, smooth_boxes=True):
+    def __init__(self, kernel_size=21, sigma=2, channels=3, box_kernel_size=9, smooth_boxes=True, debug=False):
         """
         :param kernel_size: Size of the blurring kernel.
         :param sigma: standard deviation of the blurring kernel. Higher values lead to sharper edges, less blurring.
@@ -28,6 +28,7 @@ class Obfuscator:
         self.sigma = sigma
         self.channels = channels
         self.smooth_boxes = smooth_boxes
+        self.debug = debug
 
         # create internal kernels (3D kernels with the channels in the last dimension)
         kernel = self._gaussian_kernel(kernel_size=self.kernel_size, sigma=self.sigma)  # kernel for blurring
@@ -169,7 +170,9 @@ class Obfuscator:
 
         image_array = np.expand_dims(image, axis=0)
         box_array = []
-        anonymized_image = np.copy(image)
+
+        if self.debug:
+            anonymized_image = np.copy(image)
         for box in boxes:
             x_min = int(math.floor(box.x_min))
             y_min = int(math.floor(box.y_min))
@@ -177,14 +180,15 @@ class Obfuscator:
             y_max = int(math.ceil(box.y_max))
             box_array.append(np.array([x_min, y_min, x_max, y_max]))
 
-            anonymized_image[y_min:y_max, x_min:x_max, :] = [255, 0, 0]
+            if self.debug:
+                # mask = self._get_box_mask(np.array([x_min, y_min, x_max, y_max]), (image.shape[1], image.shape[2]))
+                # print(mask.shape)
+                anonymized_image[y_min:y_max, x_min:x_max, :] = [255, 0, 0]
 
-        return anonymized_image
-
-            # mask = self._get_box_mask(np.array([x_min, y_min, x_max, y_max]), (image.shape[1], image.shape[2]))
-            # print(mask.shape)
-        # box_array = np.stack(box_array, axis=0)
-        # box_array = np.expand_dims(box_array, axis=0)
-        #
-        # anonymized_images = self._obfuscate_numpy(image_array, box_array)
-        # return anonymized_images[0]
+        if self.debug:
+            return anonymized_image
+        else:
+            box_array = np.stack(box_array, axis=0)
+            box_array = np.expand_dims(box_array, axis=0)
+            anonymized_images = self._obfuscate_numpy(image_array, box_array)
+            return anonymized_images[0]

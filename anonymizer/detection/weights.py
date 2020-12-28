@@ -33,4 +33,4 @@ def download_weights(download_directory, version='1.0.0'):
         _download_single_model_weights(download_directory=download_directory, kind=kind, version=version)
 
 
-# download_weights("anonymizer/detection")
+download_weights("anonymizer/detection")
