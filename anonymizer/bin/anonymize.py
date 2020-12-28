@@ -89,7 +89,8 @@ def main(input_path, image_output_path, weights_path, image_extensions, face_thr
     download_weights(download_directory=weights_path)
 
     kernel_size, sigma, box_kernel_size = obfuscation_parameters.split(',')
-    obfuscator = Obfuscator(kernel_size=int(kernel_size), sigma=float(sigma), box_kernel_size=int(box_kernel_size), debug=debug)
+    obfuscator = Obfuscator(kernel_size=int(kernel_size), sigma=float(sigma), box_kernel_size=int(box_kernel_size),
+                            debug=debug)
     detectors = {
         'face': Detector(kind='face', weights_path=get_weights_path(weights_path, kind='face')),
         'plate': Detector(kind='plate', weights_path=get_weights_path(weights_path, kind='plate'))
