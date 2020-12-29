@@ -42,8 +42,8 @@ class Detector:
         detection_boxes = self.detection_graph.get_tensor_by_name('detection_boxes:0')
 
         image_height, image_width, channels = image.shape
-        assert channels == 3, f'Invalid number of channels: {channels}. ' \
-                              f'Only images with three color channels are supported.'
+        assert channels == 3, 'Invalid number of channels: {}. ' \
+                              'Only images with three color channels are supported.'.format(channels)
 
         np_images = np.array([image])
         num_boxes, scores, boxes = self.session.run(

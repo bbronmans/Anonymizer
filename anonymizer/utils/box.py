@@ -8,7 +8,8 @@ class Box:
         self.kind = str(kind)
 
     def __repr__(self):
-        return f'Box({self.x_min}, {self.y_min}, {self.x_max}, {self.y_max}, {self.score}, {self.kind})'
+        return 'Box({}, {}, {}, {}, {}, {})'.format(self.x_min,
+                                                    self.y_min, self.x_max, self.y_max, self.score, self.kind)
 
     def __eq__(self, other):
         if isinstance(other, Box):

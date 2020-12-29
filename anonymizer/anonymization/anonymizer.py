@@ -49,14 +49,14 @@ class Anonymizer:
         return self.obfuscator.obfuscate(image, detected_boxes), detected_boxes
 
     def anonymize_images(self, input_path, output_path, detection_thresholds, file_types, write_json):
-        print(f'Anonymizing images in {input_path} and saving the anonymized images to {output_path}...')
+        print('Anonymizing images in {} and saving the anonymized images to {}...'.format(input_path, output_path))
 
         Path(output_path).mkdir(exist_ok=True)
         assert Path(output_path).is_dir(), 'Output path must be a directory'
 
         files = []
         for file_type in file_types:
-            files.extend(list(Path(input_path).glob(f'**/*.{file_type}')))
+            files.extend(list(Path(input_path).glob('**/*.{}'.format(file_type))))
 
         for input_image_path in tqdm(files):
             # Create output - output directory

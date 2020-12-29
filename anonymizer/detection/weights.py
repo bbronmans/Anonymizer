@@ -12,10 +12,10 @@ WEIGHTS_GDRIVE_IDS = {
 
 
 def get_weights_path(base_path, kind, version='1.0.0'):
-    assert version in WEIGHTS_GDRIVE_IDS.keys(), f'Invalid weights version "{version}"'
-    assert kind in WEIGHTS_GDRIVE_IDS[version].keys(), f'Invalid weights kind "{kind}"'
+    assert version in WEIGHTS_GDRIVE_IDS.keys(), 'Invalid weights version "{}"'.format(version)
+    assert kind in WEIGHTS_GDRIVE_IDS[version].keys(), 'Invalid weights kind "{}"'.format(kind)
 
-    return str(Path(base_path) / f'weights_{kind}_v{version}.pb')
+    return str(Path(base_path) / 'weights_{}_v{}.pb'.format(kind, version))
 
 
 def _download_single_model_weights(download_directory, kind, version):
@@ -24,7 +24,7 @@ def _download_single_model_weights(download_directory, kind, version):
     if Path(weights_path).exists():
         return
 
-    print(f'Downloading {kind} weights to {weights_path}')
+    print('Downloading {} weights to {}'.format(kind, weights_path))
     gdd.download_file_from_google_drive(file_id=file_id, dest_path=weights_path, unzip=False)
 
 
