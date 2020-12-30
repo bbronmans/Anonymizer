@@ -8,4 +8,4 @@ __pycache__
 /output - rood, default parameters/
 /output - rood, plate certainty threshold 0.1/
 /output - nextcloud12/
-/weights/
+/weights/*

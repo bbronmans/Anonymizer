@@ -63,7 +63,7 @@ class TestAnonymizer:
         input_path.mkdir()
         output_path = tmp_path / 'output'
         for i, input_image in enumerate(input_images):
-            image_path = input_path / f'{i}.png'
+            image_path = input_path / '{}.png'.format(i)
             pil_image = Image.fromarray((input_image * 255).astype(np.uint8), mode='RGB')
             pil_image.save(image_path)
 
