@@ -58,16 +58,11 @@ def parse_args():
     parser.add_argument('--debug', dest='debug', action='store_true')
     parser.set_defaults(debug=False)
 
-    parser.add_argument('--obfuscation-kernel', required=False, default='21,2,9',
-                        metavar='kernel_size,sigma,box_kernel_size',
+    parser.add_argument('--obfuscation-kernel', required=False, default='21',
+                        metavar='kernel_size',
                         help='This parameter is used to change the way the blurring is done. '
                              'For blurring a gaussian kernel is used. The default size of the kernel is 21 pixels '
-                             'and the default value for the standard deviation of the distribution is 2. '
-                             'Higher values of the first parameter lead to slower transitions while blurring and '
-                             'larger values of the second parameter lead to sharper edges and less blurring. '
-                             'To make the transition from blurred areas to the non-blurred image smoother another '
-                             'kernel is used which has a default size of 9. Larger values lead to a smoother '
-                             'transition. Both kernel sizes must be odd numbers.')
+                             'Higher values lead to a stronger blurring effect but take more time to compute')
     args = parser.parse_args()
 
     print('input: {}'.format(args.input))
@@ -88,9 +83,8 @@ def main(input_path, image_output_path, weights_path, image_extensions, face_thr
          write_json, obfuscation_parameters, debug):
     download_weights(download_directory=weights_path)
 
-    kernel_size, sigma, box_kernel_size = obfuscation_parameters.split(',')
-    obfuscator = Obfuscator(kernel_size=int(kernel_size), sigma=float(sigma), box_kernel_size=int(box_kernel_size),
-                            debug=debug)
+    kernel_size = obfuscation_parameters.split(',')[0]
+    obfuscator = Obfuscator(kernel_size=int(kernel_size), debug=debug)
     detectors = {
         'face': Detector(kind='face', weights_path=get_weights_path(weights_path, kind='face')),
         'plate': Detector(kind='plate', weights_path=get_weights_path(weights_path, kind='plate'))
