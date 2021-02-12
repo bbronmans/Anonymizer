@@ -5,8 +5,6 @@ import numpy as np
 from PIL import Image
 from tqdm import tqdm
 
-from PIL.ExifTags import TAGS
-
 
 def load_np_image(image_path):
     image = Image.open(image_path).convert('RGB')
