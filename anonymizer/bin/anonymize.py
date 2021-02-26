@@ -63,6 +63,10 @@ def parse_args():
                         help='This parameter is used to change the way the blurring is done. '
                              'For blurring a gaussian kernel is used. The default size of the kernel is 21 pixels '
                              'Higher values lead to a stronger blurring effect but take more time to compute')
+    parser.add_argument('--suffix', required=False, default='',
+                        metavar='',
+                        help='Suffix for anonimized image filenames')
+
     args = parser.parse_args()
 
     print('input: {}'.format(args.input))
@@ -73,6 +77,7 @@ def parse_args():
     print('plate-threshold: {}'.format(args.plate_threshold))
     print('write-detections: {}'.format(args.write_detections))
     print('obfuscation-kernel: {}'.format(args.obfuscation_kernel))
+    print('suffix: {}'.format(args.suffix))
     print('debug: {}'.format(args.debug))
     print()
 
@@ -80,7 +85,7 @@ def parse_args():
 
 
 def main(input_path, image_output_path, weights_path, image_extensions, face_threshold, plate_threshold,
-         write_json, obfuscation_parameters, debug):
+         write_json, obfuscation_parameters, debug, suffix):
     download_weights(download_directory=weights_path)
 
     kernel_size = obfuscation_parameters.split(',')[0]
@@ -96,12 +101,12 @@ def main(input_path, image_output_path, weights_path, image_extensions, face_thr
     anonymizer = Anonymizer(obfuscator=obfuscator, detectors=detectors)
     anonymizer.anonymize_images(input_path=input_path, output_path=image_output_path,
                                 detection_thresholds=detection_thresholds, file_types=image_extensions.split(','),
-                                write_json=write_json)
+                                write_json=write_json, suffix=suffix)
 
 
 if __name__ == '__main__':
     args = parse_args()
     main(input_path=args.input, image_output_path=args.image_output, weights_path=args.weights,
-         image_extensions=args.image_extensions,
-         face_threshold=args.face_threshold, plate_threshold=args.plate_threshold,
-         write_json=args.write_detections, obfuscation_parameters=args.obfuscation_kernel, debug=args.debug)
+         image_extensions=args.image_extensions, face_threshold=args.face_threshold,
+         plate_threshold=args.plate_threshold, write_json=args.write_detections,
+         obfuscation_parameters=args.obfuscation_kernel, debug=args.debug, suffix=args.suffix)
