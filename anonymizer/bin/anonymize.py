@@ -63,7 +63,7 @@ def parse_args():
                         help='This parameter is used to change the way the blurring is done. '
                              'For blurring a gaussian kernel is used. The default size of the kernel is 21 pixels '
                              'Higher values lead to a stronger blurring effect but take more time to compute')
-    parser.add_argument('--suffix', required=False, default='',
+    parser.add_argument('--suffix', required=False, default=None,
                         metavar='',
                         help='Suffix for anonimized image filenames')
 

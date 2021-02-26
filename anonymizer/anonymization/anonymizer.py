@@ -50,7 +50,7 @@ class Anonymizer:
             detected_boxes.extend(new_boxes)
         return self.obfuscator.obfuscate(image, detected_boxes), detected_boxes
 
-    def anonymize_images(self, input_path, output_path, detection_thresholds, file_types, write_json, suffix=''):
+    def anonymize_images(self, input_path, output_path, detection_thresholds, file_types, write_json, suffix=None):
         print('Anonymizing images in {} and saving the anonymized images to {}...'.format(input_path, output_path))
 
         Path(output_path).mkdir(exist_ok=True)
@@ -63,8 +63,14 @@ class Anonymizer:
         for input_image_path in tqdm(files):
             # Create output - output directory
             relative_path = input_image_path.relative_to(input_path)
+
+            if suffix:
+                relative_path = relative_path.with_name("{name}_{suffix}{ext}".format(name=relative_path.stem,
+                                                                                      suffix=suffix,
+                                                                                      ext=relative_path.suffix))
+
             (Path(output_path) / relative_path.parent).mkdir(exist_ok=True, parents=True)
-            output_image_path = (Path(output_path) / relative_path).with_suffix(suffix)
+            output_image_path = (Path(output_path) / relative_path)
             output_detections_path = (Path(output_path) / relative_path).with_suffix('.json')
 
             # Anonymize image
