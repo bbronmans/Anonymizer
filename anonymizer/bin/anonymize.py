@@ -66,6 +66,10 @@ def parse_args():
     parser.add_argument('--suffix', required=False, default=None,
                         metavar='',
                         help='Suffix for anonimized image filenames')
+    parser.add_argument('--blur-scale', type=float, required=False, default=1.0,
+                        metavar='1.0',
+                        help='Increases (values >1) or decreases (values <1) the size '
+                             'of the blurred area around a detection.')
 
     args = parser.parse_args()
 
@@ -78,6 +82,7 @@ def parse_args():
     print('write-detections: {}'.format(args.write_detections))
     print('obfuscation-kernel: {}'.format(args.obfuscation_kernel))
     print('suffix: {}'.format(args.suffix))
+    print('blur-scale: {}'.format(args.blur_scale))
     print('debug: {}'.format(args.debug))
     print()
 
@@ -85,11 +90,11 @@ def parse_args():
 
 
 def main(input_path, image_output_path, weights_path, image_extensions, face_threshold, plate_threshold,
-         write_json, obfuscation_parameters, debug, suffix):
+         write_json, obfuscation_parameters, debug, suffix, blur_scale):
     download_weights(download_directory=weights_path)
 
     kernel_size = obfuscation_parameters.split(',')[0]
-    obfuscator = Obfuscator(kernel_size=int(kernel_size), debug=debug)
+    obfuscator = Obfuscator(kernel_size=int(kernel_size), debug=debug, blur_scale=blur_scale)
     detectors = {
         'face': Detector(kind='face', weights_path=get_weights_path(weights_path, kind='face')),
         'plate': Detector(kind='plate', weights_path=get_weights_path(weights_path, kind='plate'))
@@ -109,4 +114,5 @@ if __name__ == '__main__':
     main(input_path=args.input, image_output_path=args.image_output, weights_path=args.weights,
          image_extensions=args.image_extensions, face_threshold=args.face_threshold,
          plate_threshold=args.plate_threshold, write_json=args.write_detections,
-         obfuscation_parameters=args.obfuscation_kernel, debug=args.debug, suffix=args.suffix)
+         obfuscation_parameters=args.obfuscation_kernel, debug=args.debug, suffix=args.suffix,
+         blur_scale=args.blur_scale)
