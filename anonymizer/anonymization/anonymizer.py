@@ -57,7 +57,7 @@ class Anonymizer:
         assert Path(output_path).is_dir(), 'Output path must be a directory'
 
         files = []
-        for file_type in file_types:
+        for file_type in [list(map(str.lower,file_types)),list(map(str.upper,file_types))]:
             files.extend(list(Path(input_path).glob('**/*.{}'.format(file_type))))
 
         for input_image_path in tqdm(files):

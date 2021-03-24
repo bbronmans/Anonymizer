@@ -39,8 +39,8 @@ def parse_args():
                         metavar='/path/to/weights_foler',
                         help='Path to the folder where the weights are stored. If no weights with the '
                              'appropriate names are found they will be downloaded automatically.')
-    parser.add_argument('--image-extensions', required=False, default='jpg,png',
-                        metavar='"jpg,png"',
+    parser.add_argument('--image-extensions', required=False, default='jpg,png,jpeg',
+                        metavar='"jpg,png,jpeg"',
                         help='Comma-separated list of file types that will be anonymized')
     parser.add_argument('--face-threshold', type=float, required=False, default=0.3,
                         metavar='0.3',
