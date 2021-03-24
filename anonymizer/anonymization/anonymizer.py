@@ -12,13 +12,19 @@ def load_np_image(image_path):
     # image = image.resize((width//4, height//4))
     np_image = np.array(image)
 
-    exif_data = image.info['exif']
+    if 'exif' in image.info:
+        exif_data = image.info['exif']
+    else:
+        exif_data = None
     return np_image, exif_data
 
 
 def save_np_image(image, image_path, exif_data):
     pil_image = Image.fromarray((image).astype(np.uint8), mode='RGB')
-    pil_image.save(image_path, exif=exif_data)
+    if exif_data:
+        pil_image.save(image_path, exif=exif_data)
+    else:
+        pil_image.save(image_path)
 
 
 def save_detections(detections, detections_path):
