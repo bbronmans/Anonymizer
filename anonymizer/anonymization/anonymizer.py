@@ -64,11 +64,8 @@ class Anonymizer:
 
         files = []
         for file_type in list(map(str.lower,file_types)) + list(map(str.upper,file_types)):
-            print(file_type)
             files.extend(list(Path(input_path).glob('**/*.{}'.format(file_type))))
-
-        for file in files:
-            print(file)
+        print('{} images found to anonimize.'.format(len(files)))
 
         for input_image_path in tqdm(files):
             # Create output - output directory
@@ -86,6 +83,8 @@ class Anonymizer:
             # Anonymize image
             image, exif_data = load_np_image(str(input_image_path))
             anonymized_image, detections = self.anonymize_image(image=image, detection_thresholds=detection_thresholds)
+
+            #Save image
             save_np_image(image=anonymized_image, image_path=str(output_image_path), exif_data=exif_data)
             if write_json:
                 save_detections(detections=detections, detections_path=str(output_detections_path))
