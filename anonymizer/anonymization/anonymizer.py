@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 from tqdm import tqdm
+import pyexiv2
 
 
 def load_np_image(image_path):
@@ -11,20 +12,25 @@ def load_np_image(image_path):
     # width, height = image.size
     # image = image.resize((width//4, height//4))
     np_image = np.array(image)
-
-    if 'exif' in image.info:
-        exif_data = image.info['exif']
-    else:
-        exif_data = None
-    return np_image, exif_data
+    return np_image
 
 
-def save_np_image(image, image_path, exif_data):
-    pil_image = Image.fromarray((image).astype(np.uint8), mode='RGB')
-    if exif_data:
-        pil_image.save(image_path, exif=exif_data)
-    else:
-        pil_image.save(image_path)
+def load_image_exif(image_path):
+    image = pyexiv2.Image(image_path)
+    exif = image.read_exif()
+    image.close()
+    return exif
+
+
+def write_image_exif(image_path, exif):
+    image = pyexiv2.Image(image_path)
+    image.modify_exif(exif)
+    image.close()
+
+
+def save_np_image(image, image_path):
+    pil_image = Image.fromarray(image.astype(np.uint8), mode='RGB')
+    pil_image.save(image_path)
 
 
 def save_detections(detections, detections_path):
@@ -81,10 +87,12 @@ class Anonymizer:
             output_detections_path = (Path(output_path) / relative_path).with_suffix('.json')
 
             # Anonymize image
-            image, exif_data = load_np_image(str(input_image_path))
+            image = load_np_image(str(input_image_path))
+            exif_data = load_image_exif(str(input_image_path))
             anonymized_image, detections = self.anonymize_image(image=image, detection_thresholds=detection_thresholds)
 
             #Save image
-            save_np_image(image=anonymized_image, image_path=str(output_image_path), exif_data=exif_data)
+            save_np_image(image=anonymized_image, image_path=str(output_image_path))
+            write_image_exif(str(output_image_path), exif_data)
             if write_json:
                 save_detections(detections=detections, detections_path=str(output_detections_path))
