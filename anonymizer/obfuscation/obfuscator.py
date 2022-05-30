@@ -38,7 +38,6 @@ class Obfuscator:
             y_max = int(math.ceil(box.y_max))
 
             if self.blur_scale != 1:
-                print(image.shape)
                 height, width, _ = image.shape
                 center_y = y_min + (y_max - y_min) / 2
                 new_len_y = (y_max - y_min) * self.blur_scale
@@ -49,11 +48,6 @@ class Obfuscator:
                 new_len_x = (x_max - x_min) * self.blur_scale
                 x_min = max(0, int(center_x - new_len_x / 2))
                 x_max = min(width - 1, int(center_x + new_len_x / 2))
-
-                print("x")
-                print(x_min, x_max)
-                print("y")
-                print(y_min, y_max)
 
             if self.debug:
                 anonymized_image[y_min:y_max, x_min:x_max, :] = [255, 0, 0]
