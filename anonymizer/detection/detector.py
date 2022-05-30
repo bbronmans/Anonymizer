@@ -1,7 +1,13 @@
 import numpy as np
+import os
+# Set TensorFlow logging level to 3 before loading tensorflow to suppress warnings
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
 
 from anonymizer.utils import Box
+
+# Discard depreciation warnings from Tensorflow
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 
 class Detector:
