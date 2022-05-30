@@ -8,3 +8,4 @@ requests==2.22.0
 googledrivedownloader==0.4
 tqdm==4.36.1
 pyexiv2==2.5.0
+python-dotenv==0.20.0
