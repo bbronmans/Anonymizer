@@ -5,6 +5,9 @@ FROM tensorflow/tensorflow:1.15.0-gpu-py3
 RUN apt-get update
 RUN apt-get install -y build-essential
 
+# TODO: Kijken of dit werkt
+RUN git clone https://github.com/bbronmans/Anonymizer.git/
+
 # Install required packages
 COPY requirements.txt .
 RUN pip install --upgrade pip
