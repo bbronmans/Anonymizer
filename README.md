@@ -44,18 +44,18 @@ en dat dat allemaal automatisch gebeurt tijdens het aanmaken van de Docker conta
 ## Installatie
 
 1. Installeer [Docker Desktop](https://www.docker.com/products/docker-desktop)
-   </br>1.a. Het zou kunnen dat je een onderdeel van windows genaamd WSL(2) moet downloaden om Docker te kunnen gebruiken. 
+   </br>1.a. Het zou kunnen dat je een onderdeel van windows genaamd WSL(2) moet downloaden of updaten om Docker te kunnen gebruiken. 
    Volg de download instructies op de website van Docker hiervoor.
-2. Start Docker
-3. Klik rechts bovenaan deze pagina op de groene Code knop, en download als .zip bestand.
-4. Pak het zip-bestand uit op een locatie op je computer waar je de software wilt draaien.
+2. Start Docker met administrator-rechten (rechtermuisklik op Docker Desktop, "run as administrator")
+3. Scroll naar boven in deze pagina en klik rechts bovenaan op de groene <>Code knop, en Download als .zip bestand.
+4. Pak het zip-bestand uit op een locatie op je computer waar je de software wilt installeren.
 5. Start een Command Prompt door op de Windows start knop te drukken en te zoeken naar 'cmd'.
    *Rechter-muisklik op het command prompt, en kies om het command prompt uit te voeren met administrator-rechten.*
 6. Ga in de command prompt naar de locatie waar de inhoud van het zipbestand staat. 
    Dit doe je door het commando 'cd LOCATIE' in te voeren.
 Stel dat je het zipbestand in je downloads map hebt uitgepakt onder de naam Anonymizer, dan typ je bijvoorbeeld:
 ```
-cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer\
+cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer-master\
    ``` 
 
 en druk op enter om het commando uit te voeren. 
