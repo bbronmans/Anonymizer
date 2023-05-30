@@ -42,16 +42,18 @@ Het derde voordeel is dat er een groot aantal losse componenten geïnstalleerd m
 en dat dat allemaal automatisch gebeurt tijdens het aanmaken van de Docker container.
 
 ## Installatie
-
-1. Installeer [Docker Desktop](https://www.docker.com/products/docker-desktop)
+1. Update je de drivers van de NVIDIA grafische kaart naar de nieuwste versie, minimaal versie 532.
+Huidige versie controleren? Zoek in Windows naar Nvidia Control Panel, open de app. Als de versie-informatie niet direct zichtbaar is, kan je helemaal linksonder op System Information klikken; het eerste veld bij 'details' is de driver versie.
+Links staat de naam van de grafische kaart, die je https://www.nvidia.com/download/index.aspx moet invoeren om de bijbehorende drivers te downloaden. 
+2. Installeer [Docker Desktop](https://www.docker.com/products/docker-desktop)
    </br>1.a. Het zou kunnen dat je een onderdeel van windows genaamd WSL(2) moet downloaden of updaten om Docker te kunnen gebruiken. 
    Volg de download instructies op de website van Docker hiervoor.
-2. Start Docker met administrator-rechten (rechtermuisklik op Docker Desktop, "run as administrator")
-3. Scroll naar boven in deze pagina en klik rechts bovenaan op de groene <>Code knop, en Download als .zip bestand.
-4. Pak het zip-bestand uit op een locatie op je computer waar je de software wilt installeren.
-5. Start een Command Prompt door op de Windows start knop te drukken en te zoeken naar 'cmd'.
+3. Start Docker met administrator-rechten (rechtermuisklik op Docker Desktop, "run as administrator")
+4. Scroll naar boven in deze pagina en klik rechts bovenaan op de groene <>Code knop, en Download als .zip bestand.
+5. Pak het zip-bestand uit op een locatie op je computer waar je de software wilt installeren.
+6. Start een Command Prompt door op de Windows start knop te drukken en te zoeken naar 'cmd'.
    *Rechter-muisklik op het command prompt, en kies om het command prompt uit te voeren met administrator-rechten.*
-6. Ga in de command prompt naar de locatie waar de inhoud van het zipbestand staat. 
+7. Ga in de command prompt naar de locatie waar de inhoud van het zipbestand staat. 
    Dit doe je door het commando 'cd LOCATIE' in te voeren.
 Stel dat je het zipbestand in je downloads map hebt uitgepakt onder de naam Anonymizer, dan typ je bijvoorbeeld:
 ```
@@ -67,14 +69,31 @@ en druk op enter om het commando uit te voeren.
 ```
 docker build -t anon .
    ````
-9. Er vliegt nu een hoop tekst door beeld in de command prompt. Zodra je het onderstaande bericht ziet is de installatie geslaagd.
+9. Er vliegt nu een hoop tekst door beeld in de command prompt. Zodra je een onderstaand bericht ziet is de installatie geslaagd.
+```
+=> => naming to docker.io/library/anon
+```
+of bij een oudere versie van Docker Desktop
 ```
 Successfully built xxxxxxxxxxxx
 Successfully tagged anon:latest
 ```
 
 Indien de onderste regels een error weergeven, vraag om ondersteuning aan de beheerder en stuur de foutmelding en alle bijbehorende tekst mee.
+10. De laatste stap is het downloaden van de gewichten van de neurale netwerken.
+Maak hiervoor eerst een map "weights" aan in de installatiemap waar je de zipfile hebt uitgepakt. Zet daarin de volgende twee bestanden:
+Deze zijn te downloaden via de volgende twee links.
+Gezichten: https://drive.google.com/file/d/1CwChAYxJo3mON6rcvXsl82FMSKj82vxF
 
+    nummerborden / kentekens: https://drive.google.com/file/d/1Fls9FYlQdRlLAtw-GVS_ie1oQUYmci9g
+
+Download deze 2 bestanden van zo'n 180MB per stuk, en sla de twee .pb bestanden op in de map genaamd "weights, dus 
+als we het vorige voorbeeld volgen:
+```
+cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer-master\weights\
+   ``` 
+Mochten de twee .pb bestanden niet meer beschikbaar zijn op Google Drive, stuur dan een berichtje naar de beheerder.
+Als de bovenstaande stappen zonder foutmeldingen doorlopen zijn, is de tool nu gereed voor gebruik.
 ## Gebruik
 1. De instellingen van de anonimiseringstool staan opgeslagen in een bestand genaamd "**.env**". Dit bestand staat net als de Dockerfile in het uitgepakte zipbestand en kan je openen met elke tekstbewerker als Word of Wordpad. 
  Pas de instellingen aan naar wens en sla het bestand op. De meeste instellingen kunnen bij normaal gebruik ongewijzigd blijven, alleen de instellingen voor de input- en output folder zijn essentieel om goed in te stellen.
