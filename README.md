@@ -16,13 +16,13 @@ De tool herkent gezichten en nummerborden/kentekenplaten, en maakt een kopie van
 
 
 ## Installatievereisten
-- Minstens 6 GB vrije schijfruimte + installatie van Docker Desktop
-- Een GPU van Nvidia (niet vereist, maar sterk aangeraden voor ~10x snellere uitvoering)
+- Minstens 10 GB vrije schijfruimte + installatie van Docker Desktop
+- Een GPU van Nvidia (niet vereist, maar sterk aangeraden voor ~50x snellere uitvoering)
 
 **Heb ik een Nvidia GPU?**
 
 Controleer als volgt: 
-ctrl+alt+del &rightarrow; taakbeheer &rightarrow; (evt) meer details &rightarrow; performance &rightarrow; 
+ctrl+alt+del &rightarrow; taakbeheer &rightarrow; (evt) meer details &rightarrow; prestaties/performance &rightarrow; 
 kijk links bij GPU of er een NVIDIA model staat.
 
 De anonimiseringssoftware gebruikt een Neuraal Netwerk (kunstmatige intelligentie) dat vele malen sneller is bij gebruik van een Nvidia GPU.
@@ -42,10 +42,10 @@ Het derde voordeel is dat er een groot aantal losse componenten geïnstalleerd m
 en dat dat allemaal automatisch gebeurt tijdens het aanmaken van de Docker container.
 
 ## Installatie
-1. Update je de drivers van de NVIDIA grafische kaart naar de nieuwste versie, minimaal versie 532.
+1. Update je de drivers van de NVIDIA grafische kaart naar de nieuwste versie, minimaal versie 527.41.
 Huidige versie controleren? Zoek in Windows naar Nvidia Control Panel, open de app. Als de versie-informatie niet direct zichtbaar is, kan je helemaal linksonder op System Information klikken; het eerste veld bij 'details' is de driver versie.
-Links staat de naam van de grafische kaart, die je https://www.nvidia.com/download/index.aspx moet invoeren om de bijbehorende drivers te downloaden. 
-2. Installeer [Docker Desktop](https://www.docker.com/products/docker-desktop)
+Links staat de naam van de grafische kaart, die je https://www.nvidia.com/download/index.aspx moet invoeren om de bijbehorende drivers te downloaden. Sluit het Nvidia Control Panel voor je de installatie start.
+2. Installeer [Docker Desktop](https://www.docker.com/products/docker-desktop) met administrator-rechten (rechtermuisklik op Docker Desktop, "run as administrator")
    </br>1.a. Het zou kunnen dat je een onderdeel van windows genaamd WSL(2) moet downloaden of updaten om Docker te kunnen gebruiken. 
    Volg de download instructies op de website van Docker hiervoor.
 3. Start Docker met administrator-rechten (rechtermuisklik op Docker Desktop, "run as administrator")
@@ -55,7 +55,7 @@ Links staat de naam van de grafische kaart, die je https://www.nvidia.com/downlo
    *Rechter-muisklik op het command prompt, en kies om het command prompt uit te voeren met administrator-rechten.*
 7. Ga in de command prompt naar de locatie waar de inhoud van het zipbestand staat. 
    Dit doe je door het commando 'cd LOCATIE' in te voeren.
-Stel dat je het zipbestand in je downloads map hebt uitgepakt onder de naam Anonymizer, dan typ je bijvoorbeeld:
+Stel dat je het zipbestand in je downloads map hebt uitgepakt onder de naam Anonymizer-master, dan typ je bijvoorbeeld:
 ```
 cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer-master\
    ``` 
@@ -63,39 +63,48 @@ cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer-master\
 en druk op enter om het commando uit te voeren. 
 
 *Tip: Je kan de locatie knippen en plakken. Soms werkt het plakken binnen het command prompt niet zoals gebruikelijk met ctrl+v maar d.m.v. een rechtermuisklik.*
-7. Controleer dat je in de juiste locatie zit door het commando 'dir' in te voeren. 
-   Als het goed is retourneert het command prompt dezelfde lijst van bestanden en mappen als bovenaan deze pagina, waaronder een bestand genaamd Dockerfile
-8. Voer het volgende commando in; **Let op: Met deze stap wordt een paar GB (~5.5 GB) aan software gedownload en geïnstalleerd, dit zal een tijd duren.**   
-```
-docker build -t anon .
-   ````
-9. Er vliegt nu een hoop tekst door beeld in de command prompt. Zodra je een onderstaand bericht ziet is de installatie geslaagd.
-```
-=> => naming to docker.io/library/anon
-```
-of bij een oudere versie van Docker Desktop
-```
-Successfully built xxxxxxxxxxxx
-Successfully tagged anon:latest
-```
-
-Indien de onderste regels een error weergeven, vraag om ondersteuning aan de beheerder en stuur de foutmelding en alle bijbehorende tekst mee.
-10. De laatste stap is het downloaden van de gewichten van de neurale netwerken.
+8. Controleer dat je in de juiste locatie zit door het commando 'dir' in te voeren. 
+   Als het goed is retourneert het command prompt dezelfde lijst van bestanden en mappen als bovenaan deze pagina, waaronder een bestand genaamd Dockerfile.
+9. De 1-na laatste stap is het downloaden van de gewichten van de neurale netwerken.
 Maak hiervoor eerst een map "weights" aan in de installatiemap waar je de zipfile hebt uitgepakt. Zet daarin de volgende twee bestanden:
 Deze zijn te downloaden via de volgende twee links.
 Gezichten: https://drive.google.com/file/d/1CwChAYxJo3mON6rcvXsl82FMSKj82vxF
 
-    nummerborden / kentekens: https://drive.google.com/file/d/1Fls9FYlQdRlLAtw-GVS_ie1oQUYmci9g
 
-Download deze 2 bestanden van zo'n 180MB per stuk, en sla de twee .pb bestanden op in de map genaamd "weights, dus 
+nummerborden / kentekens: 
+    https://drive.google.com/file/d/1Fls9FYlQdRlLAtw-GVS_ie1oQUYmci9g
+
+Download deze 2 bestanden van zo'n 180MB per stuk, en sla de twee .pb bestanden op in de map genaamd "weights", dus 
 als we het vorige voorbeeld volgen:
 ```
 cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer-master\weights\
    ``` 
 Mochten de twee .pb bestanden niet meer beschikbaar zijn op Google Drive, stuur dan een berichtje naar de beheerder.
+
+11. De laatste stap: voer het volgende commando in; **Let op: Met deze stap wordt een paar GB (~7.5 GB) aan software gedownload en geïnstalleerd, dit zal een tijd duren.**   
+```
+docker build -t anon .
+   ```
+
+10. Er vliegt nu een hoop tekst door beeld in de command prompt. Zodra onderstaand bericht onderaan de tekst staat is de installatie geslaagd.
+```
+=> => naming to docker.io/library/anon
+```
+
+Indien de onderste regels een error weergeven, vraag om ondersteuning aan de beheerder en stuur de foutmelding en alle bijbehorende tekst mee.
+Het laatste commando is:
+
+```
+docker compose build
+   ```
+Dit commando hoort in enkele seconden klaar te zijn en als onderste regel weer te geven:
+```
+=> => naming to docker.io/library/anonymizer-master-anon
+```
+
 Als de bovenstaande stappen zonder foutmeldingen doorlopen zijn, is de tool nu gereed voor gebruik.
 ## Gebruik
-1. De instellingen van de anonimiseringstool staan opgeslagen in een bestand genaamd "**.env**". Dit bestand staat net als de Dockerfile in het uitgepakte zipbestand en kan je openen met elke tekstbewerker als Word of Wordpad. 
+1. De instellingen van de anonimiseringstool staan opgeslagen in een bestand genaamd "**.env**". Dit bestand staat net als de Dockerfile in het uitgepakte zipbestand en kan je openen met Kladblok/Notepad. 
  Pas de instellingen aan naar wens en sla het bestand op. De meeste instellingen kunnen bij normaal gebruik ongewijzigd blijven, alleen de instellingen voor de input- en output folder zijn essentieel om goed in te stellen.
  *Let op: De naam van het .env bestand mag niet gewijzigd worden.*
 2. Start Docker Desktop met administrator-rechten (rechter muisklik op het icoontje, "Als administrator uitvoeren")
@@ -114,7 +123,7 @@ cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer\
    Als het goed is retourneert het command prompt dezelfde lijst van bestanden en mappen als bovenaan deze pagina, waaronder een bestand genaamd Dockerfile
 6. Voer het volgende commando in; hiermee start je het anonimiseringsproces.   
 ```
-docker-compose run anon
+docker compose run anon
    ````
 7. Er verschijnt in de command prompt wat tekst waaronder een kopie van de gebruikte anonymizer-instellingen, en na 10 tot 30 seconden komt een voortgangsbalk in beeld. De output folder zal nu langzaam vollopen met geanonimiseerde afbeeldingen. Het proces is voltooid wanneer de volgende tekst getoond wordt: 
 ```
@@ -122,7 +131,7 @@ Successfully anonymized [] images.
 ```
 8. Om de software na gebruik netjes af te sluiten, voer je het volgende commando in:
 ```
-docker-compose down
+docker compose down
    ````
 waarna je het command prompt kan wegklikken en Docker kan afsluiten.
 
