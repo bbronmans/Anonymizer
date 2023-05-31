@@ -15,13 +15,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Get the anonymizer code
 RUN mkdir -p anon
-WORKDIR /anon
-RUN git clone https://github.com/bbronmans/Anonymizer.git/ .
+RUN git clone https://github.com/bbronmans/Anonymizer.git/ ./anon/
+RUN mv ./anon/* .
+RUN mv -f ./anon/.[!.]* .
 
 # Install required packages
 RUN pip3 install --upgrade pip
 RUN python3 -m pip install --upgrade pip setuptools
-RUN pip install -r ./requirements.txt
+RUN pip install -r requirements.txt
 
 # Create symlink between python3 and python
 RUN ln -s /usr/bin/python3 /usr/bin/python
