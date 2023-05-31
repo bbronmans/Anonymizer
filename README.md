@@ -77,9 +77,9 @@ nummerborden / kentekens:
     https://drive.google.com/file/d/1Fls9FYlQdRlLAtw-GVS_ie1oQUYmci9g
 
 Download deze 2 .pb bestanden van zo'n 180MB per stuk, en sla de twee op in de map genaamd "weights", dus 
-als we het vorige voorbeeld volgen:
+als we het vorige voorbeeld volgen in de volgende map:
 ```
-cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer-master\weights\
+C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer-master\weights\
    ``` 
 Mochten de twee .pb bestanden niet meer beschikbaar zijn op Google Drive, stuur dan een berichtje naar de beheerder.
 
