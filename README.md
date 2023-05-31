@@ -68,7 +68,7 @@ en druk op enter om het commando uit te voeren.
    Als het goed is retourneert het command prompt dezelfde lijst van bestanden en mappen als bovenaan deze pagina, waaronder een bestand genaamd Dockerfile.
 
 9. De 1-na laatste stap is het downloaden van de gewichten van de neurale netwerken.
-Maak hiervoor eerst een map "weights" aan in de installatiemap waar je de zipfile hebt uitgepakt. 
+Maak hiervoor eerst een map genaamd "weights" (zonder aanhalingstekens) aan in de installatiemap waar je de zipfile hebt uitgepakt. 
 In deze "weights" map, moet je de volgende twee bestanden zetten:
 Gezichten: https://drive.google.com/file/d/1CwChAYxJo3mON6rcvXsl82FMSKj82vxF
 
