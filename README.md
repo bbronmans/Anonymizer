@@ -34,7 +34,7 @@ De anonimiseringstool is geschreven in programmeertaal [Python](https://www.pyth
 
 ### Wat is Docker?
 Docker is software waarmee je afgeschermde omgevingen (genaamd containers) kunt opzetten binnen je computer, compleet met eigen besturingssysteem.
-Het eerste voordeel is dat onafhankelijk wat voor fratsen je uithaalt binnen zo'n container, alles daarbuiten onveranderd blijft.
+Het eerste voordeel is dat onafhankelijk wat voor fratsen je uithaalt binnen zo'n container, alles daarbuiten onveranderd blijft en vice versa.
 Je kunt dus ook geen conflicten kan krijgen met reeds geïnstalleerde programma's of instellingen buiten die omgeving.
 Het tweede voordeel is dat alle gebruikers van dezelfde container gegarandeerd precies dezelfde software, instellingen, tools, versies, etc. hebben.
 Hierdoor werkt iedereen in een identieke omgeving, die door de ontwikkelaar/beheerder van de container vastgelegd is.
@@ -94,6 +94,7 @@ Er vliegt nu een hoop tekst door beeld in de command prompt. Zodra onderstaand b
 ```
 
 Indien de onderste regels een error weergeven, vraag om ondersteuning aan de beheerder en stuur de foutmelding en alle bijbehorende tekst mee.
+
 11. Het laatste commando is:
 
 ```
