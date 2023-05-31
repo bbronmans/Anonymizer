@@ -139,6 +139,26 @@ docker compose down
    ````
 waarna je het command prompt kan wegklikken en Docker kan afsluiten.
 
+
+
+## Software updaten
+Indien het in de toekomst nodig is om aanpassingen aan de software te maken, zal dat gebeuren via de laatste twee stappen van het reguliere installatieproces zoals hierboven beschreven.
+Zodra de beheerder van de software de gewenste aanpassingen aan de code heeft uitgevoerd, is die update binnen te halen met de volgende drie commando's in het command prompt:
+1. Open het command prompt en navigeer naar de installatie-locatie, bijv:
+```
+cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer\
+   ```
+
+2. Het volgende commando download de nieuwste versie:
+```
+docker build -t anon .
+   ```
+
+3. Met dit laatste commando wordt de oude versie van de software vervangen door de nieuwere:
+```
+docker compose build
+   ```
+
 ## Kwaliteit
 Deze software probeert gezichten en kentekens te herkennen. Dit gaat echter niet altijd goed. Er zijn twee soorten fouten die gemaakt kunnen worden.
 
