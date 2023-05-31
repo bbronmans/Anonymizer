@@ -108,7 +108,7 @@ Dit commando hoort in enkele seconden klaar te zijn en als onderste regel weer t
 Als alle bovenstaande stappen zonder foutmeldingen doorlopen zijn, is de tool nu gereed voor gebruik.
 
 ## Gebruik
-1. De instellingen van de anonimiseringstool staan opgeslagen in een bestand genaamd "**.env**". Dit bestand staat net als de Dockerfile in het uitgepakte zipbestand en kan je openen met Kladblok/Notepad. 
+1. De instellingen van de anonimiseringstool staan opgeslagen in een bestand genaamd "**.env**". Dit bestand staat net als de Dockerfile in het uitgepakte zipbestand en kan je openen met Kladblok/Notepad. Let op: Windows heeft soms de neiging om dit bestand te verbergen. Zie je het bestand niet en wil je het zichtbaar maken? In Windows Explorer staat bovenaan onder Beeld de optie om verborgen bestanden te tonen.
  Pas de instellingen aan naar wens en sla het bestand op. De meeste instellingen kunnen bij normaal gebruik ongewijzigd blijven, alleen de instellingen voor de input- en output folder zijn essentieel om goed in te stellen.
  *Let op: De naam van het .env bestand mag niet gewijzigd worden.*
 2. Start Docker Desktop met administrator-rechten (rechter muisklik op het icoontje, "Als administrator uitvoeren")
