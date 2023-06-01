@@ -152,9 +152,9 @@ Pas de instellingen aan naar wens en sla het bestand op. De meeste instellingen 
 
 4. Ga in de command prompt naar de locatie waar alle code voor de anonimiseringstool staat. 
    Dit doe je door het commando 'cd LOCATIE' in te voeren in de command prompt.
-Stel dat je de code in je downloads map hebt uitgepakt onder de naam Anonymizer, dan typ je bijvoorbeeld:
+Stel dat je de code in je downloads map hebt uitgepakt, dan typ je bijvoorbeeld:
 ```
-cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer\
+cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer-master\
    ````
  en druk op enter om het commando uit te voeren.
 
