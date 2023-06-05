@@ -5,10 +5,11 @@ FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y build-essential
 
-# Install Python 3.11
+# Install Python 3.11 and git
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.11 \
     python3-pip \
+    git \
     && \
     apt-get clean && \
     rm -rf \var\lib\apt\lists\*

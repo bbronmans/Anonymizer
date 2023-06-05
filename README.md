@@ -192,7 +192,7 @@ Zodra de beheerder van de software de gewenste aanpassingen aan de code heeft ui
 
 1. Open het command prompt en navigeer naar de installatie-locatie, bijv:
 ```
-cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer\
+cd C:\Users\GEBRUIKERSNAAM\Downloads\Anonymizer-master\
    ```
 
 
