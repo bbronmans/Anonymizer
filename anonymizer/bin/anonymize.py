@@ -109,6 +109,7 @@ if __name__ == '__main__':
     # Convert env variables from string to bool
     args["DEBUG"] = bool(args["DEBUG"].lower() == "true")
     args["WRITE_DETECTIONS"] = bool(args["WRITE_DETECTIONS"].lower() == "true")
+    args["WRITE_EXIF"] = bool(args["WRITE_DETECTIONS"].lower() == "true")
 
     # Old print statements
     # print('input: {}'.format(args["input_folder"]))
