@@ -1,4 +1,4 @@
-# Base image of tensorflow 1.15 as installing tensorflow using pip lacks required dependencies from CUDA/CUDNN
+# Base ubuntu image containing drivers for cuda and cudnn
 FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
 
 # Some essentials to install other packages

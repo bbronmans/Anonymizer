@@ -76,7 +76,7 @@ from anonymizer.obfuscation import Obfuscator
 
 
 def main(input_path, image_output_path, weights_path, image_extensions, face_threshold, plate_threshold,
-         write_json, obfuscation_kernel_size, debug, suffix, blur_scale):
+         write_json, write_exif, obfuscation_kernel_size, debug, suffix, blur_scale):
     download_weights(download_directory=weights_path)
 
     kernel_size = obfuscation_kernel_size
@@ -94,7 +94,7 @@ def main(input_path, image_output_path, weights_path, image_extensions, face_thr
     anonymizer = Anonymizer(obfuscator=obfuscator, detectors=detectors)
     anonymizer.anonymize_images(input_path=input_path, output_path=image_output_path,
                                 detection_thresholds=detection_thresholds, file_types=image_extensions.split(','),
-                                write_json=write_json, suffix=suffix)
+                                write_json=write_json, write_exif=write_exif, suffix=suffix)
 
 
 if __name__ == '__main__':
@@ -127,6 +127,5 @@ if __name__ == '__main__':
     main(input_path="./input", image_output_path="./output", weights_path="./weights",
          image_extensions=args["IMAGE_EXTENSIONS"], face_threshold=float(args["FACE_THRESHOLD"]),
          plate_threshold=float(args["LICENCE_PLATE_THRESHOLD"]), write_json=bool(args["WRITE_DETECTIONS"]),
-         obfuscation_kernel_size=int(args["OBFUSCATION_KERNEL_SIZE"]), debug=bool(args["DEBUG"]), suffix=args["SUFFIX"],
-         blur_scale=float(args["BLUR_SCALE"]))
-
+         write_exif=bool(args["WRITE_EXIF"]), obfuscation_kernel_size=int(args["OBFUSCATION_KERNEL_SIZE"]),
+         debug=bool(args["DEBUG"]), suffix=args["SUFFIX"], blur_scale=float(args["BLUR_SCALE"]))
